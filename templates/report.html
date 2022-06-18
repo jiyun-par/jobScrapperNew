@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Job Search</title>
+
+  <style>
+      body{
+      width: 100%;
+      height: 100vh;
+      background:#827397;
+      position:relative;
+      }
+    body::-webkit-scrollbar {
+    display: none;
+}
+
+    h1{
+      text-align:center;
+    }
+    
+    h1 b{
+      color:#E9D5CA
+    }
+     .export-btn{
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      width: 150px;
+      height: 50px;
+      border: 1px solid #fff;
+      border-radius: 50px;
+      text-align: center;
+      line-height: 50px;
+      font-weight: 600;
+      position: absolute;
+      right: 10%;
+      top: 50px;
+      margin-bottom: 20px;
+     }
+    .back-btn{
+      font-size:50px;
+      position: absolute;
+      top: 50px;
+      left:76px;
+      text-decoration: none;
+    }
+    section{
+      width: 90%;
+      display:grid;
+      gap: 50px;
+      grid-template-columns: repeat(3,1fr);
+      margin: 0 auto;
+      margin-top:100px;
+    }
+    .card{
+      position: relative;
+      padding: 20px;
+      height: 228px;
+      border-radius:20px;
+      background-color:rgba(255, 242, 242, 0.5);      
+    }
+    .card a{
+    position: absolute;
+    bottom: 20px;
+    right: 22px;
+    width: 100px;
+    height: 50px;
+    display: block;
+    background: #827397;
+    text-decoration: none;
+    border-radius: 50px;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    margin: 10px 0 0 auto;
+  
+    }
+    .card h4{
+      font-size: 20px;
+      margin: 10px 0
+    }
+    .card div, .card span{
+    font-size: 20px;
+    font-weight: 600;
+    color: #363062;
+    }
+    @media screen and (max-width:1080px){
+      section{
+        grid-template-columns: repeat(2,1fr);
+      }
+        .export-btn{
+        top:70px;
+      }
+       .back-btn{
+        top: 70px;
+        left: 37px;
+      }
+    }
+    
+    @media screen and (max-width:750px){
+      section{
+        grid-template-columns: repeat(1,1fr);
+      }
+      .export-btn{
+        top:96px;
+      }
+      .back-btn{
+            top: 96px;
+    left: 37px;
+      }
+      
+    }
+    .top-btn{
+      width: 100px;
+      height: 100px;
+      font-size:30px;
+      background-color:#354259;
+      color: #ffffff;
+      line-height: 100px;
+      border-radius:100%;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      text-align:center;
+      cursor:pointer;
+      
+    }
+  </style>
+</head>
+<body>
+   <h1>Results for <b>{{word}}</b><br/>
+     Found <b>{{resultsNumber}} </b>jobs</h1>
+    <a href="/" class="back-btn">👈</a>
+    <section>
+    <a class="export-btn" href="/export?word={{word}}">Export to CSV</a>
+        {%for job in jobs%}
+      <div class="card">
+           <h4>{{job.title}}</h4>
+           <div>Company: <br> 🖥 {{job.company}}</div>
+           <span>Location: <br> 🚙 {{job.location}}</span>
+           <a href={{job.link}} target="_blank">Apply</a>
+      </div>
+        {% endfor %}
+    </section>
+  <div class="top-btn">
+    TOP
+  </div>
+ <script>
+   const topBtn = document.querySelector(".top-btn");
+   topBtn.addEventListener("click",()=>{
+     window.scrollTo({top:0,left:0, behavior:"smooth"})
+   })
+ </script>
+</body>
+</html>

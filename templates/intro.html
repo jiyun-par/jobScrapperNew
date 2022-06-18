@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Job Search</title>
+  <style>
+    body{
+      width: 100%;
+      height: 100vh;
+      background:#827397;
+      position:relative;
+      overflow:hidden;
+    }
+     body::-webkit-scrollbar {
+    display: none;
+  }
+    form{
+      width:540px;
+      margin: 0 auto;
+      position:relative;
+    }
+    h1{
+      text-align:center;
+      color:#E9D5CA;
+    }
+    input {
+      display:block;
+      margin:0 auto;
+      width:50%;
+      height: 50px;
+      text-indent: 20px;
+      border: none;
+      background-color:#4D4C7D;
+      font-size: 20px;
+      color: #fff;
+      outline:none;    
+    }
+    button{
+      width: 100px;
+      height: 50px;
+      font-size: 20px;
+      cursor:pointer;
+      position:absolute;
+      bottom: -80px;
+      left: 50%;
+      transform:translateX(-50%);
+      border-radius:20px;
+      border:1px solid #fff;
+      background:none;
+      color:#fff;
+      
+    }
+    button::hover{
+      background-color:#4D4C7D;
+      color:#fff;
+    }
+    
+    #wrapper{
+      position: absolute;
+      top: 50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+    }
+    .loader-box{
+      display:none;
+      position: relative;
+    }
+    .loading{
+  
+      font-size:25px;
+      color: #fff;
+    }
+.spinner-box{
+  position:absolute;
+  bottom: -80px;
+  left:50%;
+  transform: translateX(-50%)
+}
+.spinner {
+  animation: rotator 1.2s linear infinite;
+}
+
+@keyframes rotator {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(270deg); }
+}
+
+.path {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation: dash 1.2s ease-in-out infinite, 
+    colors 4.8s ease-in-out infinite;
+}
+
+@keyframes colors {
+	0% { stroke: #4285F4; }
+	25% { stroke: #DE3E35; }
+	50% { stroke: #F7C223; }
+	75% { stroke: #1B9A59; }
+  100% { stroke: #4285F4; }
+}
+
+@keyframes dash {
+ 0% { stroke-dashoffset: 120; }
+ 50% {
+   stroke-dashoffset: 120/4;
+   transform:rotate(135deg);
+ }
+ 100% {
+   stroke-dashoffset: 120;
+   transform:rotate(450deg);
+ }
+}
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <div class="loader-box">
+      <div class="spinner-box">
+     <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+   <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>  
+      </div>
+</svg>
+  <div class="loading">
+  </div>
+      
+    </div>
+  <h1 class="title">Search Job<br/>What you want! 👏</h1>
+  <form action="/report" method="get">
+    <input placeholder="Search for a job?" required name="word"/>
+    <br/>
+      <button>Search</button>
+  </form>
+  </div>
+ <script>
+   const searchBtn = document.querySelector("button")
+   const form = document.querySelector("form")
+   const title = document.querySelector(".title")
+   const input = document.querySelector("input")
+   const loading = document.querySelector(".loading")
+   const loaderBox = document.querySelector(".loader-box")
+   form.addEventListener("submit",handleSearchBtnClick)
+   function handleSearchBtnClick(e){
+     if(input.value && input.value.trim() !== ""){
+     form.style.display = "none";
+     title.style.display = "none";
+     loaderBox.style.display = "block";
+     loading.innerText = `Searching jobs for ${input.value}...`
+     } else {
+       e.preventDefault()
+       window.location.reload()
+     }
+    
+   }
+  </script>
+</body>
+</html>
